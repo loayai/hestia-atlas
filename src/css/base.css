@@ -1,0 +1,146 @@
+/* Base
+   ========================================================================== */
+
+.ha {
+	background-color: var(--ha-bg);
+	scroll-padding-top: calc(var(--ha-header-h) + 16px);
+
+	& body {
+		font-family: var(--ha-font);
+		font-size: var(--ha-fs-base);
+		line-height: var(--ha-lh);
+		color: var(--ha-text);
+		background-color: var(--ha-bg);
+		text-rendering: optimizeLegibility;
+	}
+
+	& input,
+	& select,
+	& textarea,
+	& button {
+		font-family: inherit;
+	}
+
+	& a {
+		color: var(--ha-link);
+
+		&:hover {
+			color: var(--ha-link-hover);
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+	}
+
+	& h1,
+	& h2,
+	& h3,
+	& .u-text-H1,
+	& .u-text-H2,
+	& .u-text-H3 {
+		color: var(--ha-text-strong);
+		font-weight: var(--ha-fw-semibold);
+	}
+
+	& h1,
+	& .u-text-H1 {
+		font-size: var(--ha-fs-title);
+		font-weight: var(--ha-fw-medium);
+	}
+
+	& h2,
+	& .u-text-H2 {
+		font-size: var(--ha-fs-xl);
+	}
+
+	& h3,
+	& .u-text-H3 {
+		font-size: var(--ha-fs-lg);
+	}
+
+	& code,
+	& pre,
+	& .console-output {
+		font-family: var(--ha-font-mono);
+	}
+
+	& :focus-visible {
+		outline: 2px solid var(--ha-focus);
+		outline-offset: 2px;
+	}
+
+	& ::selection {
+		background-color: var(--ha-brand-100);
+	}
+
+	/* Hestia accessibility helper used by our markup as well */
+	& .u-hidden-visually {
+		position: absolute !important;
+		width: 1px !important;
+		height: 1px !important;
+		padding: 0 !important;
+		margin: -1px !important;
+		overflow: hidden !important;
+		clip: rect(0, 0, 0, 0) !important;
+		white-space: nowrap !important;
+		border: 0 !important;
+	}
+}
+
+/* Icons (Lucide sprite) */
+.ha-i {
+	width: 1.15em;
+	height: 1.15em;
+	flex: none;
+	stroke: currentColor;
+	fill: none;
+	stroke-width: 1.75;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	vertical-align: -0.2em;
+}
+
+.ha-spin {
+	animation: ha-spin 0.9s linear infinite;
+}
+
+@keyframes ha-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.ha-muted {
+	color: var(--ha-text-muted);
+}
+
+.ha-small {
+	font-size: var(--ha-fs-xs);
+}
+
+.ha-mono {
+	font-family: var(--ha-font-mono);
+	font-size: 0.92em;
+}
+
+.ha-break {
+	overflow-wrap: anywhere;
+}
+
+/* Hide main content until the shell has rearranged Hestia's page (removed by JS; failsafe in boot). */
+.ha-loading .app-content {
+	opacity: 0;
+}
+
+.ha .app-content {
+	transition: opacity 80ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ha *,
+	.ha *::before,
+	.ha *::after {
+		transition-duration: 0ms !important;
+		animation-duration: 0ms !important;
+		scroll-behavior: auto !important;
+	}
+}

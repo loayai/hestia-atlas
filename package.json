@@ -1,0 +1,28 @@
+{
+  "name": "hestia-atlas",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hestia Atlas \u2014 an alternative interface theme for HestiaCP",
+  "license": "GPL-3.0-or-later",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "playwright test -c tests/playwright.config.mjs tests/workflows.spec.mjs --workers=1",
+    "shots:readme": "playwright test -c tests/playwright.config.mjs tests/readme-shots.spec.mjs",
+    "shots": "playwright test -c tests/playwright.config.mjs tests/screenshots.spec.mjs",
+    "deploy": "bash scripts/dev/deploy.sh"
+  },
+  "devDependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@playwright/test": "^1.63.0",
+    "browserslist": "^4.29.3",
+    "esbuild": "^0.28.2",
+    "lightningcss": "^1.33.0",
+    "lucide-static": "^1.49.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/loayai/hestia-atlas.git"
+  },
+  "homepage": "https://github.com/loayai/hestia-atlas"
+}

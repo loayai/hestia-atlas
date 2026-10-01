@@ -1,0 +1,15 @@
+/*!
+ * Hestia Atlas theme — an independent interface theme for HestiaCP.
+ * Not affiliated with or endorsed by cPanel, L.L.C. or WebPros.
+ * License: GPL-3.0-or-later. Icons: Lucide (ISC). Font: Open Sans (OFL-1.1).
+ */
+@import "./tokens.css";
+@import "./fonts.css";
+@import "./base.css";
+@import "./shell.css";
+@import "./components.css";
+@import "./lists.css";
+@import "./forms.css";
+@import "./dashboard.css";
+@import "./pages.css";
+@import "./login.css";

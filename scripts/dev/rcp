@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Copy files to the dev server: rcp <local...> <remote-path>   (rsync-like via tar over ssh)
+set -e
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+HOSTLINE="$(python "$ROOT/scripts/dev/devenv.py" host | tr -d '\r')"
+TARGET="${HOSTLINE%% *}"; PORT="${HOSTLINE##* }"
+DEST="${@: -1}"; set -- "${@:1:$#-1}"
+exec scp -q -r -i "$HOME/.ssh/hestia_atlas_dev_ed25519" -o UserKnownHostsFile="$HOME/.ssh/hestia_atlas_known_hosts" -o BatchMode=yes -P "$PORT" "$@" "$TARGET:$DEST"

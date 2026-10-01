@@ -1,0 +1,64 @@
+/* Atlas Evergreen colour scheme
+   --------------------------------------------------------------------------
+   An optional green palette in the spirit of classic community hosting forums.
+   Only colour tokens change; layout, icons and typography are identical to the
+   default scheme.
+
+   The navigation column uses #60a96d with white, semibold labels in the
+   style of classic forum headers (white on #60a96d is about 2.8:1, so labels
+   are semibold and carry a faint shadow; hover/active states darken the green
+   and rail flyouts use #4f925b). Every other green is derived from the same hue
+   (HSL 131°) at different lightness steps; soft surfaces use a mint tint.
+   ========================================================================== */
+
+:root {
+	/* navigation column */
+	--ha-sidebar: #60a96d;
+	--ha-sidebar-raised: #6db079;
+	--ha-sidebar-deep: #4f925b; /* flyouts and tooltips in the collapsed rail */
+	--ha-sidebar-text: #fff;
+	--ha-sidebar-text-muted: #f2fbf3;
+	--ha-sidebar-text-strong: #fff;
+	--ha-sidebar-hover-bg: rgb(16 48 22 / 12%);
+	--ha-sidebar-active-bg: rgb(16 48 22 / 22%);
+	--ha-sidebar-indicator: #fff;
+	--ha-sidebar-divider: rgb(255 255 255 / 28%);
+	--ha-sidebar-scrollbar: rgb(255 255 255 / 45%);
+	--ha-sidebar-focus: #fff;
+	--ha-sidebar-label-weight: var(--ha-fw-semibold);
+	--ha-sidebar-text-shadow: 0 1px 1px rgb(16 48 22 / 35%);
+
+	/* brand: hue 131 / 30% saturation, lightness steps */
+	--ha-brand-50: #eafaec; /* mint */
+	--ha-brand-100: #cff2d2; /* mint */
+	--ha-brand-300: #86cb8e;
+	--ha-brand-500: #4f925b;
+	--ha-brand-600: #40774a; /* buttons — 5.3:1 with white text */
+	--ha-brand-700: #36633e; /* links */
+	--ha-brand-800: #2b5032;
+
+	/* accent: the navigation green itself */
+	--ha-accent-50: #eafaec;
+	--ha-accent-100: #cff2d2;
+	--ha-accent-500: #60a96d;
+	--ha-accent-700: #478553;
+
+	/* neutrals: light greys with a faint green cast */
+	--ha-slate-25: #fbfbfb;
+	--ha-slate-50: #f5f7f6;
+	--ha-slate-100: #eceeec;
+	--ha-slate-150: #e1e5e2;
+	--ha-slate-200: #d4d9d5;
+	--ha-slate-300: #b9c0ba;
+	--ha-slate-400: #8f9990;
+	--ha-slate-500: #6c7a6e;
+	--ha-slate-600: #546357;
+	--ha-slate-800: #253127;
+	--ha-slate-900: #162218;
+
+	/* success stays teal-green so it does not read as a brand colour */
+	--ha-green-50: #ecf9f5;
+	--ha-green-300: #94d1c2;
+	--ha-green-600: #1c6e5a;
+	--chart-line-2-color: var(--ha-amber-500);
+}

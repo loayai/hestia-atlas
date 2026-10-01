@@ -1,0 +1,115 @@
+/* Page-specific adjustments for Hestia views
+   ========================================================================== */
+
+/* Statistics (/list/stats/) */
+.ha .stats {
+	padding: 0;
+}
+
+.ha .stats-item {
+	margin-bottom: var(--ha-space-4);
+	padding: var(--ha-space-5);
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	box-shadow: var(--ha-shadow-card);
+
+	&:hover {
+		background: var(--ha-surface);
+		border-color: var(--ha-border);
+		box-shadow: var(--ha-shadow-card);
+	}
+
+	&:last-child {
+		border-bottom: 1px solid var(--ha-border);
+	}
+}
+
+.ha .stats-item-header-title {
+	color: var(--ha-text-strong);
+	font-size: var(--ha-fs-xl);
+	font-weight: var(--ha-fw-normal);
+}
+
+.ha .stats-item-header-icon {
+	color: var(--ha-sidebar);
+	font-size: 2rem;
+}
+
+.ha .stats-item-summary-title {
+	border-bottom: 2px solid var(--ha-border);
+	color: var(--ha-text-label);
+	font-size: var(--ha-fs-sm);
+}
+
+.ha .stats-item-list,
+.ha .stats-item-summary-list {
+	font-size: var(--ha-fs-sm);
+}
+
+.ha .stats-item-list-item-label {
+	color: var(--ha-text-label);
+	font-style: normal;
+}
+
+.ha .stats-item-list-item-value {
+	color: var(--ha-text-strong);
+	border-color: var(--ha-border);
+}
+
+/* Server information (/list/server/) */
+.ha .server-summary {
+	margin-bottom: var(--ha-space-4);
+	padding: var(--ha-space-5);
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	box-shadow: var(--ha-shadow-card);
+}
+
+.ha .server-summary-icon .fas {
+	color: var(--ha-sidebar);
+	font-size: 3rem;
+}
+
+.ha .server-summary-title {
+	color: var(--ha-text-strong);
+	font-weight: var(--ha-fw-normal);
+}
+
+.ha .server-summary-list-label {
+	color: var(--ha-text-label);
+	font-size: var(--ha-fs-sm);
+}
+
+/* Logs, terminal and console output */
+.ha .logs-container,
+.ha .console-output {
+	border-radius: var(--ha-radius);
+}
+
+.ha .logs-container {
+	max-height: none;
+	padding: var(--ha-space-4);
+	border: 1px solid var(--ha-border);
+	background: var(--ha-surface);
+}
+
+.ha .console-output {
+	font-size: var(--ha-fs-sm);
+	color: var(--ha-text);
+}
+
+.ha .web-terminal {
+	border-radius: var(--ha-radius);
+}
+
+/* Resource graphs (/list/rrd/) */
+.ha canvas {
+	max-width: 100%;
+}
+
+.ha .u-charts,
+.ha .rrd-chart {
+	background: var(--ha-surface);
+}

@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+.secrets/
+node_modules/
+tests/.auth/
+tests/playwright-report/
+tests/test-results/
+screenshots/**/*.tmp
+.vendor/
+*.log

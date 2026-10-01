@@ -1,0 +1,134 @@
+/* Login, password reset and 2FA pages
+   ========================================================================== */
+
+.ha-guest {
+	& .page-login,
+	& .page-reset {
+		background:
+			linear-gradient(180deg, var(--ha-sidebar) 0, var(--ha-sidebar) 280px, transparent 280px),
+			var(--ha-bg);
+
+		& .app {
+			min-height: 100%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 64px 16px 40px;
+
+			@media (--below-md) {
+				padding-top: 32px;
+			}
+		}
+	}
+
+	& .login {
+		display: block;
+		flex-grow: 0;
+		width: 100%;
+		max-width: 420px;
+		margin: 0;
+		padding: 36px 36px 32px;
+		background: var(--ha-surface);
+		border: 0;
+		border-radius: var(--ha-radius-lg);
+		box-shadow: 0 10px 40px rgb(10 20 60 / 18%), 0 2px 6px rgb(10 20 60 / 8%);
+
+		@media (--below-md) {
+			padding: 28px 22px 24px;
+		}
+
+		/* Logo */
+		& > a:first-child {
+			display: flex !important;
+			justify-content: center;
+			margin-bottom: 24px !important;
+
+			& img {
+				width: auto;
+				height: 72px;
+			}
+		}
+
+		& form {
+			width: 100%;
+		}
+
+		& .form-label {
+			color: var(--ha-text-strong);
+		}
+
+		& .form-control {
+			min-height: 40px;
+			font-size: var(--ha-fs-md);
+		}
+
+		& .error {
+			display: flex;
+			gap: 8px;
+			padding: 10px 12px;
+			margin-bottom: 18px;
+			border: 1px solid var(--ha-danger-border);
+			border-left-width: 4px;
+			border-radius: var(--ha-radius);
+			background: var(--ha-danger-bg);
+			color: var(--ha-danger);
+			font-weight: var(--ha-fw-semibold);
+		}
+
+		& .button {
+			min-height: 40px;
+			font-size: var(--ha-fs-md);
+		}
+
+		/* Primary action spans the card, secondary actions sit under it */
+		& form > .button:not(.button-secondary),
+		& .u-side-by-side > .button:not(.button-secondary) {
+			width: 100%;
+		}
+
+		& .u-side-by-side {
+			flex-direction: column;
+			align-items: stretch;
+			gap: 10px;
+		}
+
+		& .u-side-by-side > .button-secondary {
+			width: 100%;
+		}
+
+		& .form-label.u-side-by-side {
+			flex-direction: row;
+			align-items: baseline;
+			justify-content: space-between;
+		}
+	}
+
+	& .login-title {
+		margin-bottom: 22px;
+		color: var(--ha-text-strong);
+		font-size: var(--ha-fs-xl);
+		font-weight: var(--ha-fw-normal);
+		text-align: center;
+	}
+
+	& .login-form-link {
+		color: var(--ha-link);
+		text-transform: none;
+		font-size: var(--ha-fs-sm);
+		font-weight: var(--ha-fw-semibold);
+
+		&:hover {
+			color: var(--ha-link-hover);
+		}
+	}
+
+	& .app-footer,
+	& .ha-login-footer {
+		margin-top: 20px;
+		border: 0;
+		color: var(--ha-text-muted);
+		font-size: var(--ha-fs-xs);
+		text-align: center;
+	}
+}

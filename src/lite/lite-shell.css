@@ -1,0 +1,617 @@
+/* Hestia Atlas Lite — CSS-only application shell
+   Re-lays out Hestia's own header markup (templates/includes/panel.php):
+     .top-bar     → white header (logo moves into the sidebar on desktop)
+     .main-menu   → navy left sidebar (desktop) / scrollable section strip (tablet, phone)
+   No markup is added; every link, menu, notification and shortcut is Hestia's.
+   `.ha` is rewritten to `html` by the build.
+   ========================================================================== */
+
+/* Frame
+   -------------------------------------------------------------------------- */
+
+.ha .app:has(> .app-header) {
+	min-height: 100%;
+	height: auto;
+
+	@media (--lg) {
+		padding-left: var(--ha-sidebar-w);
+	}
+}
+
+.ha .app-header {
+	padding-top: var(--ha-header-h);
+}
+
+.ha .app-content {
+	width: 100%;
+	max-width: calc(var(--ha-content-max) + 2 * var(--ha-gutter));
+	padding: var(--ha-space-6) var(--ha-gutter) var(--ha-space-10);
+}
+
+.ha .container {
+	max-width: none;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+/* Header (Hestia .top-bar)
+   -------------------------------------------------------------------------- */
+
+.ha .top-bar {
+	top: 0;
+	left: 0;
+	right: 0;
+	width: auto;
+	height: var(--ha-header-h);
+	background: var(--ha-surface);
+	border-bottom: 0;
+	box-shadow: var(--ha-shadow-header);
+	z-index: 30;
+}
+
+.ha .top-bar-inner {
+	max-width: none;
+	align-items: center;
+	gap: var(--ha-space-3);
+	padding: 0 var(--ha-gutter);
+
+	@media (--lg) {
+		padding-left: calc(var(--ha-sidebar-w) + var(--ha-gutter));
+	}
+}
+
+.ha .top-bar-left,
+.ha .top-bar-right {
+	align-items: center;
+	min-width: 0;
+}
+
+.ha .top-bar-right {
+	gap: 4px;
+}
+
+/* Logo: a navy tile on small screens, the sidebar's brand area on desktop */
+.ha .top-bar-logo {
+	flex: none;
+	align-items: center;
+	margin-right: var(--ha-space-4);
+	padding: 6px 10px;
+	border-radius: var(--ha-radius);
+	background: var(--ha-sidebar);
+
+	& img {
+		display: block;
+		height: 22px;
+		width: auto;
+	}
+
+	@media (--lg) {
+		position: fixed;
+		z-index: 41;
+		top: 0;
+		left: 0;
+		width: var(--ha-sidebar-w);
+		height: var(--ha-header-h);
+		margin: 0;
+		padding: 0 var(--ha-space-5);
+		border-radius: 0;
+
+		& img {
+			height: 30px;
+		}
+	}
+}
+
+/* Account usage summary (user, disk, bandwidth) */
+.ha .top-bar-usage-inner {
+	gap: var(--ha-space-5);
+	color: var(--ha-text-label);
+	font-size: var(--ha-fs-sm);
+	font-weight: var(--ha-fw-normal);
+	text-shadow: none;
+	white-space: nowrap;
+
+	& .u-text-bold {
+		color: var(--ha-text-strong);
+		font-weight: var(--ha-fw-semibold);
+	}
+
+	& .fas {
+		color: var(--ha-sidebar);
+		margin-right: 4px;
+	}
+}
+
+.ha .top-bar-usage-item {
+	margin-right: 0;
+
+	@media (--md) and (--below-lg) {
+		&:not(:first-child) {
+			display: none;
+		}
+	}
+}
+
+/* Header icon buttons (notifications + Hestia's top menu) */
+.ha .top-bar-menu-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	min-width: 36px;
+	height: 36px;
+	padding: 0 8px;
+	border: 1px solid transparent;
+	border-radius: var(--ha-radius);
+	background: transparent;
+	color: var(--ha-sidebar);
+	font-size: var(--ha-fs-base);
+	font-weight: var(--ha-fw-semibold);
+	text-shadow: none;
+	box-shadow: none;
+
+	& .fas {
+		font-size: 1.05rem;
+	}
+
+	&:hover,
+	&:focus-visible,
+	&:active,
+	&.active {
+		border-color: transparent;
+		background: var(--ha-slate-100);
+		box-shadow: none;
+		color: var(--ha-sidebar);
+		text-shadow: none;
+		text-decoration: none;
+	}
+
+	&.active {
+		border-color: var(--ha-sidebar);
+	}
+}
+
+.ha .top-bar-menu-link-logout {
+	color: var(--ha-danger);
+
+	&:hover {
+		color: var(--ha-danger);
+		background: var(--ha-danger-bg);
+	}
+}
+
+.ha .top-bar-menu-list .top-bar-menu-link {
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.ha .top-bar-menu-list {
+	gap: 2px;
+}
+
+/* Mobile top menu dropdown */
+.ha .top-bar-menu-panel {
+	@media (--below-md) {
+		top: calc(100% + 1px);
+		background: var(--ha-surface);
+		border: 1px solid var(--ha-border);
+		border-radius: 0 0 var(--ha-radius-lg) var(--ha-radius-lg);
+		box-shadow: var(--ha-shadow-pop);
+
+		& .top-bar-menu-link {
+			justify-content: flex-start;
+			width: 100%;
+			height: 44px;
+			padding: 0 var(--ha-space-4);
+			border-radius: 0;
+		}
+
+		& .top-bar-menu-item + .top-bar-menu-item {
+			border-top: 1px solid var(--ha-border);
+		}
+	}
+}
+
+/* Notifications dropdown */
+.ha .top-bar-notifications-panel {
+	top: calc(100% + 8px);
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius-lg);
+	background: var(--ha-surface);
+	box-shadow: var(--ha-shadow-pop);
+
+	@media (--below-sm) {
+		position: fixed;
+		top: calc(var(--ha-header-h) + 6px);
+		left: 12px;
+		right: 12px;
+		width: auto;
+	}
+}
+
+.ha .top-bar-notification-item {
+	color: var(--ha-text);
+	font-size: var(--ha-fs-sm);
+	border-bottom-color: var(--ha-border);
+
+	&.unseen {
+		background: var(--ha-accent-50);
+		box-shadow: inset 3px 0 0 var(--ha-accent);
+
+		& .top-bar-notification-title {
+			color: var(--ha-text-strong);
+		}
+	}
+}
+
+.ha .top-bar-notification-title {
+	color: var(--ha-text-strong);
+}
+
+.ha .top-bar-notification-delete .fas {
+	color: var(--ha-text-muted);
+}
+
+.ha .top-bar-notifications-empty {
+	color: var(--ha-text-muted);
+	font-size: var(--ha-fs-base);
+
+	& .fas {
+		font-size: 2rem;
+	}
+}
+
+.ha .top-bar-notifications-delete-all {
+	color: var(--ha-link);
+	border-top-color: var(--ha-border);
+
+	& .fas {
+		color: var(--ha-success);
+	}
+}
+
+/* Sidebar (Hestia .main-menu)
+   -------------------------------------------------------------------------- */
+
+.ha .main-menu {
+	background: var(--ha-sidebar);
+	padding: 0;
+
+	& .container {
+		max-width: none;
+		padding: 0;
+	}
+}
+
+.ha .main-menu-toggle {
+	display: none;
+}
+
+.ha .main-menu-list {
+	/* Hestia hides the list with x-show on phones; the strip below keeps it reachable */
+	display: flex !important;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.ha .main-menu-item {
+	flex: 0 0 auto;
+	display: block;
+}
+
+.ha .main-menu-item-link {
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 var(--ha-space-5);
+	border: 0;
+	color: var(--ha-text-inverse);
+	text-align: left;
+	text-decoration: none;
+
+	&:hover,
+	&:focus-visible {
+		background-color: var(--ha-sidebar-hover-bg);
+		border-color: transparent;
+		text-decoration: none;
+
+		& .main-menu-item-label {
+			color: var(--ha-sidebar-text-strong);
+		}
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ha-sidebar-focus);
+		outline-offset: -2px;
+	}
+
+	&.active {
+		background-color: var(--ha-sidebar-active-bg);
+
+		& .main-menu-item-label,
+		& .main-menu-item-label .fas {
+			color: var(--ha-sidebar-text-strong);
+			font-weight: var(--ha-fw-semibold);
+		}
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 6px;
+			bottom: 6px;
+			width: 3px;
+			border-radius: 0 3px 3px 0;
+			background: var(--ha-sidebar-indicator);
+		}
+	}
+}
+
+/* Keyboard navigation focus set by Hestia's shortcuts */
+.ha .main-menu-item.focus .main-menu-item-link {
+	background-color: var(--ha-sidebar-active-bg);
+	box-shadow: inset 0 0 0 2px var(--ha-sidebar-focus);
+}
+
+.ha .main-menu-item-label {
+	text-shadow: var(--ha-sidebar-text-shadow);
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 0;
+	color: var(--ha-text-inverse);
+	font-size: var(--ha-fs-sm);
+	font-weight: var(--ha-fw-semibold);
+	letter-spacing: 0.04em;
+	white-space: nowrap;
+
+	& .fas {
+		order: -1;
+		width: 22px;
+		margin: 0;
+		color: var(--ha-text-inverse);
+		font-size: 16px;
+		text-align: center;
+	}
+}
+
+.ha .main-menu-stats {
+	display: none;
+}
+
+/* Descriptive English labels (other languages keep Hestia's translated labels) */
+.ha[lang="en"] .main-menu-item-label {
+	font-size: 0;
+	letter-spacing: 0;
+
+	&::after {
+		font-size: var(--ha-fs-md);
+		font-weight: var(--ha-sidebar-label-weight);
+	}
+}
+
+.ha[lang="en"] .main-menu-item-link.active .main-menu-item-label::after {
+	font-weight: var(--ha-fw-semibold);
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/user/"] .main-menu-item-label::after {
+	content: "Users";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/web/"] .main-menu-item-label::after {
+	content: "Web Domains";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/dns/"] .main-menu-item-label::after {
+	content: "DNS Zones";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/mail/"] .main-menu-item-label::after {
+	content: "Email";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/db/"] .main-menu-item-label::after {
+	content: "Databases";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/cron/"] .main-menu-item-label::after {
+	content: "Cron Jobs";
+}
+
+.ha[lang="en"] .main-menu-item-link[href="/list/backup/"] .main-menu-item-label::after {
+	content: "Backups";
+}
+
+/* Desktop: fixed navy sidebar under the brand area */
+@media (--lg) {
+	.ha .main-menu {
+		position: fixed;
+		z-index: 40;
+		top: var(--ha-header-h);
+		bottom: 0;
+		left: 0;
+		width: var(--ha-sidebar-w);
+		padding: var(--ha-space-2) 0;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: var(--ha-sidebar-scrollbar) transparent;
+	}
+
+	.ha .main-menu-list {
+		flex-direction: column;
+	}
+}
+
+/* Tablet / phone: horizontally scrollable section strip under the header */
+@media (--below-lg) {
+	.ha .main-menu {
+		position: sticky;
+		top: var(--ha-header-h);
+		z-index: 20;
+		box-shadow: 0 2px 6px rgb(0 0 0 / 12%);
+	}
+
+	.ha .main-menu-list {
+		flex-direction: row;
+		overflow-x: auto;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	.ha .main-menu-item-link {
+		min-height: 46px;
+		padding: 0 var(--ha-space-4);
+
+		&.active::before {
+			top: auto;
+			bottom: 0;
+			left: 12px;
+			right: 12px;
+			width: auto;
+			height: 3px;
+			border-radius: 3px 3px 0 0;
+		}
+	}
+}
+
+/* Page heading
+   Hestia prints a page <h1> for small screens inside .container after the toolbar.
+   Show it everywhere and place it above the toolbar.
+   -------------------------------------------------------------------------- */
+
+.ha .app-content:has(> .container > h1.u-hide-desktop) {
+	display: flex;
+	flex-direction: column;
+
+	& > .toolbar {
+		order: 2;
+	}
+
+	& > .container {
+		display: contents;
+	}
+
+	& > .container > * {
+		order: 3;
+	}
+
+	& > .container > h1.u-hide-desktop {
+		order: 1;
+		display: block !important;
+		margin: 0 0 var(--ha-space-5) !important;
+		padding: 0 !important;
+		color: var(--ha-text-strong);
+		font-size: var(--ha-fs-title);
+		font-weight: var(--ha-fw-medium);
+		line-height: 1.25;
+		text-align: left !important;
+	}
+}
+
+/* Toolbar save buttons stay in the toolbar (no script moves them) */
+.ha .toolbar .toolbar-buttons:last-child .button[type="submit"] {
+	min-width: 110px;
+}
+
+/* Primary "Add …" actions */
+.ha .toolbar a.button.js-button-create[href^="/add/"] {
+	background: var(--ha-primary);
+	border-color: var(--ha-primary);
+	color: #fff;
+
+	& .fas {
+		color: #fff;
+	}
+
+	&:hover {
+		background: var(--ha-primary-hover);
+		border-color: var(--ha-primary-hover);
+		color: #fff;
+	}
+}
+
+/* Destructive row actions */
+.ha .units-table-row-action.shortcut-delete .units-table-row-action-link:hover {
+	border-color: var(--ha-danger);
+	background: var(--ha-danger-bg);
+	color: var(--ha-danger);
+}
+
+/* Edit action reads as the primary row action */
+@media (--hestia-table) {
+	.ha .units-table-row-action.shortcut-enter .units-table-row-action-link {
+		width: auto;
+		padding: 0 10px;
+		border-color: var(--ha-link);
+		color: var(--ha-link);
+
+		& .u-hide-desktop {
+			display: inline !important;
+		}
+	}
+}
+
+/* Footer, floating buttons, update banner
+   -------------------------------------------------------------------------- */
+
+.ha .app-footer {
+	border-top: 1px solid var(--ha-border);
+	color: var(--ha-text-muted);
+	font-size: var(--ha-fs-xs);
+	padding: 14px var(--ha-gutter);
+	text-align: left;
+
+	& a {
+		color: var(--ha-text-muted);
+	}
+}
+
+.ha .button-floating {
+	display: none;
+
+	@media (--md) {
+		display: flex;
+		width: 36px;
+		height: 36px;
+		min-width: 36px;
+		bottom: 24px;
+		border: 1px solid var(--ha-border-strong);
+		background: var(--ha-surface);
+		color: var(--ha-text-label);
+		box-shadow: var(--ha-shadow-card);
+
+		&:hover {
+			color: var(--ha-sidebar);
+			border-color: var(--ha-sidebar);
+			background: var(--ha-surface);
+		}
+	}
+}
+
+.ha .button-floating-top {
+	right: 24px;
+}
+
+.ha .button-floating-shortcuts {
+	right: 70px;
+}
+
+.ha .updates-banner {
+	left: 0;
+	right: 0;
+	width: auto;
+	background-color: var(--ha-success);
+	box-shadow: none;
+	font-size: var(--ha-fs-sm);
+
+	@media (--lg) {
+		left: var(--ha-sidebar-w);
+	}
+}

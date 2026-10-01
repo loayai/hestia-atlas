@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# Run a command on the dev server using the key installed by `devenv.py bootstrap-key`.
+set -e
+ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+HOSTLINE="$(python "$ROOT/scripts/dev/devenv.py" host | tr -d '\r')"
+TARGET="${HOSTLINE%% *}"; PORT="${HOSTLINE##* }"
+exec ssh -i "$HOME/.ssh/hestia_atlas_dev_ed25519" -o UserKnownHostsFile="$HOME/.ssh/hestia_atlas_known_hosts" -o StrictHostKeyChecking=accept-new -o BatchMode=yes -o ConnectTimeout=20 -o LogLevel=ERROR -p "$PORT" "$TARGET" "$@"

@@ -1,0 +1,211 @@
+/* Hestia Atlas design tokens
+   --------------------------------------------------------------------------
+   Original values. Colour scales are generated in HSL from HestiaCP's own brand
+   colours (logo blue #2271b8, logo magenta #e72273) plus a cool slate neutral
+   (hue 215); see docs/design-system.md for the derivation and the audit.
+   Spacing follows a 4px grid; type uses a 14px base. No value is taken from
+   another product's stylesheet or sampled from its screenshots.
+   ========================================================================== */
+
+@custom-media --sm (min-width: 576px);
+@custom-media --md (min-width: 768px);
+@custom-media --lg (min-width: 992px);
+@custom-media --xl (min-width: 1200px);
+@custom-media --xxl (min-width: 1400px);
+@custom-media --below-sm (max-width: 575.98px);
+@custom-media --below-md (max-width: 767.98px);
+@custom-media --below-lg (max-width: 991.98px);
+@custom-media --below-xl (max-width: 1199.98px);
+@custom-media --hestia-table (min-width: 1024px);
+@custom-media --below-hestia-table (max-width: 1023.98px);
+
+:root {
+	/* Colour scales ------------------------------------------------------- */
+	/* ink — hue 216, used for the navigation column; colour schemes may redefine this scale */
+	--ha-ink-900: #121e30;
+	--ha-ink-800: #1b2a41;
+	--ha-ink-700: #2a3b55;
+	--ha-ink-600: #3e506a;
+	/* slate — hue 215 neutrals */
+	--ha-slate-25: #fafbfc;
+	--ha-slate-50: #f4f6f9;
+	--ha-slate-100: #e9ecf1;
+	--ha-slate-150: #dde2e9;
+	--ha-slate-200: #ced5de;
+	--ha-slate-300: #b2bbc7;
+	--ha-slate-400: #8792a1;
+	--ha-slate-500: #647082;
+	--ha-slate-600: #4e5c6e;
+	--ha-slate-800: #202c3c;
+	--ha-slate-900: #121d2b;
+	/* brand — HestiaCP logo blue (hsl 208 69% 43%); colour schemes may redefine this scale */
+	--ha-brand-50: #edf5fc;
+	--ha-brand-100: #d8e9f9;
+	--ha-brand-300: #8bbbe4;
+	--ha-brand-500: #2885d7;
+	--ha-brand-600: #2273b9;
+	--ha-brand-700: #1c609b;
+	--ha-brand-800: #174d7d;
+	/* accent — HestiaCP logo magenta (hsl 336 81% 52%); colour schemes may redefine this scale */
+	--ha-accent-50: #fdf1f6;
+	--ha-accent-100: #fbdbe7;
+	--ha-accent-500: #e82171;
+	--ha-accent-700: #ad1f58;
+	/* status hues */
+	--ha-green-50: #ecf9f2;
+	--ha-green-300: #94d1b2;
+	--ha-green-600: #20794d;
+	--ha-amber-50: #fff6e5;
+	--ha-amber-100: #fdeac3;
+	--ha-amber-300: #f4c871;
+	--ha-amber-500: #f59f0a;
+	--ha-amber-700: #914c08;
+	--ha-red-50: #fef1f1;
+	--ha-red-300: #f4afaf;
+	--ha-red-600: #c62a2a;
+	--ha-red-700: #a42323;
+	--ha-violet-600: #6f4ebc;
+	--ha-teal-600: #217f83;
+
+	/* Typography ---------------------------------------------------------- */
+	--ha-font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	--ha-font-mono: ui-monospace, "SFMono-Regular", "Cascadia Mono", Consolas, "Liberation Mono", monospace;
+	--ha-fs-xs: 0.75rem; /* 12px */
+	--ha-fs-sm: 0.8125rem; /* 13px */
+	--ha-fs-base: 0.875rem; /* 14px */
+	--ha-fs-md: 0.9375rem; /* 15px */
+	--ha-fs-lg: 1rem; /* 16px */
+	--ha-fs-xl: 1.1875rem; /* 19px */
+	--ha-fs-title: 1.625rem; /* 26px */
+	--ha-fs-display: 2rem; /* 32px */
+	--ha-fw-normal: 400;
+	--ha-fw-medium: 500;
+	--ha-fw-semibold: 600;
+	--ha-fw-bold: 700;
+	--ha-lh: 1.5;
+	--ha-tracking-caps: 0.05em;
+
+	/* Spacing (4px grid) -------------------------------------------------- */
+	--ha-space-1: 4px;
+	--ha-space-2: 8px;
+	--ha-space-3: 12px;
+	--ha-space-4: 16px;
+	--ha-space-5: 20px;
+	--ha-space-6: 24px;
+	--ha-space-8: 32px;
+	--ha-space-10: 40px;
+
+	/* Semantic colours ---------------------------------------------------- */
+	--ha-sidebar: var(--ha-ink-800);
+	--ha-sidebar-raised: var(--ha-ink-700);
+	--ha-sidebar-deep: var(--ha-ink-900);
+	--ha-sidebar-text: #dde3ec;
+	--ha-sidebar-text-muted: #aab6c8;
+	--ha-sidebar-text-strong: #fff;
+	--ha-sidebar-hover-bg: rgb(255 255 255 / 8%);
+	--ha-sidebar-active-bg: rgb(255 255 255 / 11%);
+	--ha-sidebar-indicator: var(--ha-accent);
+	--ha-sidebar-divider: rgb(255 255 255 / 12%);
+	--ha-sidebar-scrollbar: rgb(255 255 255 / 25%);
+	--ha-sidebar-focus: #fff;
+	--ha-sidebar-label-weight: var(--ha-fw-normal);
+	--ha-sidebar-text-shadow: none;
+	--ha-accent: var(--ha-accent-500);
+	--ha-bg: var(--ha-slate-50);
+	--ha-surface: #fff;
+	--ha-surface-muted: var(--ha-slate-25);
+	--ha-surface-hover: var(--ha-slate-50);
+	--ha-surface-selected: var(--ha-brand-50);
+
+	--ha-text: var(--ha-slate-800);
+	--ha-text-strong: var(--ha-slate-900);
+	--ha-text-label: var(--ha-slate-600);
+	--ha-text-muted: var(--ha-slate-500);
+	--ha-text-inverse: var(--ha-sidebar-text);
+	--ha-link: var(--ha-brand-700);
+	--ha-link-hover: var(--ha-brand-800);
+
+	--ha-border: var(--ha-slate-150);
+	--ha-border-strong: var(--ha-slate-200);
+	--ha-border-input: var(--ha-slate-300);
+	--ha-border-table: var(--ha-slate-100);
+
+	--ha-primary: var(--ha-brand-600);
+	--ha-primary-hover: var(--ha-brand-700);
+	--ha-primary-active: var(--ha-brand-800);
+	--ha-primary-soft: var(--ha-brand-50);
+	--ha-primary-soft-border: var(--ha-brand-300);
+	--ha-focus: var(--ha-brand-500);
+	--ha-focus-ring: 0 0 0 3px color-mix(in srgb, var(--ha-brand-500) 30%, transparent);
+
+	--ha-success: var(--ha-green-600);
+	--ha-success-bg: var(--ha-green-50);
+	--ha-success-border: var(--ha-green-300);
+	--ha-warning: var(--ha-amber-700);
+	--ha-warning-solid: var(--ha-amber-500);
+	--ha-warning-bg: var(--ha-amber-50);
+	--ha-warning-border: var(--ha-amber-300);
+	--ha-danger: var(--ha-red-600);
+	--ha-danger-hover: var(--ha-red-700);
+	--ha-danger-bg: var(--ha-red-50);
+	--ha-danger-border: var(--ha-red-300);
+	--ha-info: var(--ha-brand-700);
+	--ha-info-bg: var(--ha-brand-50);
+	--ha-info-border: var(--ha-brand-300);
+	--ha-neutral-bg: var(--ha-slate-100);
+
+	/* Shape --------------------------------------------------------------- */
+	--ha-radius-sm: 4px;
+	--ha-radius: 6px;
+	--ha-radius-lg: 10px;
+	--ha-radius-pill: 999px;
+	--ha-shadow-card: 0 1px 2px rgb(18 29 43 / 6%), 0 0 0 1px rgb(18 29 43 / 4%);
+	--ha-shadow-header: 0 1px 0 var(--ha-slate-150), 0 4px 12px rgb(18 29 43 / 4%);
+	--ha-shadow-pop: 0 12px 32px rgb(18 29 43 / 16%), 0 2px 6px rgb(18 29 43 / 8%);
+	--ha-shadow-modal: 0 24px 60px rgb(18 29 43 / 28%);
+
+	/* Layout -------------------------------------------------------------- */
+	--ha-sidebar-w: 256px;
+	--ha-rail-w: 72px;
+	--ha-header-h: 60px;
+	--ha-content-max: 1360px;
+	--ha-gutter: 28px;
+	--ha-side-col: 344px;
+	--ha-control-h: 38px;
+	--ha-control-h-sm: 32px;
+	--ha-z-header: 30;
+	--ha-z-sidebar: 40;
+	--ha-z-backdrop: 35;
+	--ha-z-pop: 50;
+
+	/* Hestia variables consumed by its own components (charts, alerts) ---- */
+	--font-family: var(--ha-font);
+	--color-text: var(--ha-text);
+	--color-text-link: var(--ha-link);
+	--color-text-link-hover: var(--ha-link-hover);
+	--color-text-heading: var(--ha-text-strong);
+	--color-background: var(--ha-bg);
+	--border-radius-base: var(--ha-radius);
+	--chart-label-color: var(--ha-text-label);
+	--chart-grid-color: var(--ha-slate-100);
+	--chart-line-1-color: var(--ha-brand-600);
+	--chart-line-2-color: var(--ha-accent-500);
+	--chart-line-3-color: var(--ha-green-600);
+	--icon-color-teal: var(--ha-teal-600);
+	--icon-color-purple: var(--ha-violet-600);
+	--icon-color-maroon: var(--ha-accent-700);
+	--icon-color-red: var(--ha-danger);
+	--icon-color-green: var(--ha-success);
+	--icon-color-orange: var(--ha-amber-700);
+	--icon-color-blue: var(--ha-link);
+	--icon-color-lightblue: var(--ha-brand-500);
+}
+
+@media (--below-md) {
+	:root {
+		--ha-gutter: 16px;
+		--ha-header-h: 56px;
+		--ha-fs-title: 1.375rem;
+		--ha-fs-display: 1.75rem;
+	}
+}

@@ -1,0 +1,235 @@
+/* Forms
+   ========================================================================== */
+
+.ha .form-container {
+	max-width: 720px;
+	margin: 0;
+	padding: var(--ha-space-6);
+	background: var(--ha-surface);
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	box-shadow: var(--ha-shadow-card);
+
+	@media (--below-md) {
+		padding: var(--ha-space-4);
+	}
+
+	& > h1:first-child,
+	& > h1.u-mb20 {
+		font-size: var(--ha-fs-xl);
+		font-weight: var(--ha-fw-semibold);
+		margin-bottom: var(--ha-space-4) !important;
+	}
+
+	& h2 {
+		font-size: var(--ha-fs-lg);
+	}
+}
+
+/* The page heading already names the form */
+.ha-dup-title {
+	display: none !important;
+}
+
+.ha-has-head .form-container > h1:first-child,
+.ha-has-head .form-container > h1.u-mb20:first-of-type {
+	display: none;
+}
+
+.ha .form-container-wide {
+	max-width: 1000px;
+}
+
+.ha .form-label,
+.ha .form-check label {
+	color: var(--ha-text-strong);
+	font-size: var(--ha-fs-base);
+	font-weight: var(--ha-fw-semibold);
+}
+
+.ha .form-label {
+	margin-bottom: 6px;
+}
+
+.ha .optional {
+	color: var(--ha-text-muted);
+	font-size: var(--ha-fs-sm);
+}
+
+.ha .form-control,
+.ha .form-select {
+	min-height: var(--ha-control-h);
+	padding: 6px 10px;
+	border: 1px solid var(--ha-border-input);
+	border-radius: var(--ha-radius);
+	background-color: var(--ha-surface);
+	box-shadow: none;
+	color: var(--ha-text);
+	font-size: var(--ha-fs-base);
+	line-height: 1.5;
+	text-shadow: none;
+	transition:
+		border-color 120ms ease,
+		box-shadow 120ms ease;
+
+	&:hover {
+		border-color: var(--ha-slate-400);
+	}
+
+	&:focus {
+		outline: 0;
+		border-color: var(--ha-focus);
+		background-color: var(--ha-surface);
+		box-shadow: var(--ha-focus-ring);
+		color: var(--ha-text);
+	}
+
+	&:disabled,
+	&[readonly] {
+		background-color: var(--ha-slate-50);
+		color: var(--ha-text-label);
+		text-shadow: none;
+
+		&:hover {
+			border-color: var(--ha-border-input);
+		}
+	}
+
+	&.highlighted {
+		background-color: var(--ha-amber-50);
+	}
+
+	&:user-invalid {
+		border-color: var(--ha-danger);
+
+		&:focus {
+			box-shadow: 0 0 0 3px rgb(198 47 47 / 25%);
+		}
+	}
+}
+
+.ha textarea.form-control {
+	min-height: 96px;
+}
+
+.ha .form-select {
+	padding-right: 32px;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23586376' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+	background-size: 16px;
+	background-position: right 10px center;
+}
+
+.ha .form-control.list-editor {
+	box-shadow: none;
+}
+
+.ha .form-check {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	min-height: 24px;
+	margin-left: 0;
+	padding-left: 0;
+
+	& label {
+		font-weight: var(--ha-fw-normal);
+		color: var(--ha-text);
+		cursor: pointer;
+	}
+}
+
+.ha .form-check-input {
+	position: static;
+	flex: none;
+	width: 16px;
+	height: 16px;
+	margin: 3px 0 0;
+	accent-color: var(--ha-primary);
+	cursor: pointer;
+}
+
+.ha .form-link {
+	color: var(--ha-link);
+	font-weight: var(--ha-fw-semibold);
+	text-decoration: none;
+	border-radius: var(--ha-radius-sm);
+
+	&:hover {
+		color: var(--ha-link-hover);
+		background-color: transparent;
+		text-decoration: underline;
+	}
+
+	&:active {
+		background-color: transparent;
+	}
+}
+
+.ha .form-link-danger:hover {
+	color: var(--ha-danger);
+	background-color: transparent;
+}
+
+.ha .unlimited-toggle .fas {
+	color: var(--ha-text-label);
+}
+
+.ha .password-meter {
+	height: 4px;
+	margin: 4px 0 0;
+	border-radius: var(--ha-radius-pill);
+	box-shadow: none;
+}
+
+.ha .password-meter-input {
+	background: var(--ha-slate-100);
+}
+
+/* Hestia's "Advanced options" toggle buttons */
+.ha .form-container .button.button-secondary.u-mt20,
+.ha .form-container .js-toggle-advanced {
+	margin-top: 8px;
+}
+
+/* Action bar added under the form (moved Save button + Cancel link) */
+.ha-form-actions {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-top: var(--ha-space-6);
+	padding-top: var(--ha-space-5);
+	border-top: 1px solid var(--ha-border);
+
+	& .button {
+		min-width: 110px;
+	}
+
+	@media (--below-md) {
+		position: sticky;
+		bottom: 0;
+		z-index: 5;
+		margin-left: calc(-1 * var(--ha-space-4));
+		margin-right: calc(-1 * var(--ha-space-4));
+		margin-bottom: calc(-1 * var(--ha-space-4));
+		padding: 12px var(--ha-space-4);
+		background: var(--ha-surface);
+		box-shadow: 0 -4px 12px rgb(16 24 40 / 8%);
+		border-radius: 0 0 var(--ha-radius) var(--ha-radius);
+
+		& .button {
+			flex: 1 1 auto;
+		}
+	}
+}
+
+/* Layout helpers Hestia uses inside forms */
+.ha .sidebar-right-grid {
+	@media (--md) {
+		gap: 32px;
+	}
+}
+
+.ha .cron-tabs .form-label {
+	padding-left: 0;
+}

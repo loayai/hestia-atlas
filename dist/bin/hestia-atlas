@@ -1,0 +1,80 @@
+#!/bin/bash
+# hestia-atlas — manage the installed Hestia Atlas theme.
+#
+#   hestia-atlas status          show version, theme selection, compatibility, file integrity
+#   hestia-atlas check           compatibility check only (exit 0 = compatible)
+#   hestia-atlas repair [--hook] restore missing/modified theme files; disable the theme if
+#                                  HestiaCP became incompatible (used by the post-install hook)
+#   hestia-atlas enable [scheme] make Atlas the system theme (scheme: default | evergreen)
+#   hestia-atlas disable         restore the theme that was active before installation
+set -u
+HA_HOME="/usr/local/hestia-atlas"
+# shellcheck source=common.sh
+. "$HA_HOME/bin/common.sh"
+
+ha_require_root
+ha_detect_hestia
+DIST="$HA_HOME/dist"
+[ -f "$DIST/MANIFEST" ] || ha_die "installation files not found in $DIST — re-run install.sh"
+VERSION=$(cat "$DIST/VERSION" 2>/dev/null)
+
+previous_theme() {
+	local t
+	t=$(cat "$HA_STATE/previous-theme" 2>/dev/null)
+	[ -n "$t" ] && ! ha_is_own_theme "$t" && echo "$t" || echo "default"
+}
+
+cmd="${1:-status}"
+shift || true
+
+case "$cmd" in
+	status)
+		echo "Hestia Atlas theme $VERSION"
+		echo "HestiaCP:         $HESTIA_VERSION ($HESTIA)"
+		echo "System theme:     $(ha_system_theme)"
+		users=$(ha_theme_users | tr '\n' ' ')
+		echo "Per-user theme:   ${users:-none}"
+		if ha_check_compat quiet; then echo "Compatibility:    ok"; else echo "Compatibility:    INCOMPATIBLE"; ha_compat_problems; fi
+		if problems=$(ha_verify "$DIST"); then echo "Files:            ok"; else echo "Files:"; echo "$problems"; fi
+		if grep -qF "$HA_HOOK_BEGIN" "$HA_HOOK" 2>/dev/null; then echo "Update hook:      installed ($HA_HOOK)"; else echo "Update hook:      missing"; fi
+		;;
+	check)
+		ha_check_compat
+		exit $?
+		;;
+	repair)
+		hook=0
+		[ "${1:-}" = "--hook" ] && hook=1
+		if ! ha_check_compat; then
+			if ha_is_own_theme "$(ha_system_theme)"; then
+				prev=$(previous_theme)
+				ha_set_system_theme "$prev"
+				ha_notify_admin "Hestia Atlas theme disabled" "HestiaCP $HESTIA_VERSION changed files the Hestia Atlas theme depends on, so the theme was switched off and the '$prev' theme restored. Run <code>hestia-atlas status</code> for details and update the theme."
+			fi
+			for u in $(ha_theme_users); do ha_reset_user_theme "$u"; done
+			ha_log "repair: incompatible HestiaCP $HESTIA_VERSION — theme disabled"
+			ha_print_changes
+			exit 1
+		fi
+		ha_deploy "$DIST"
+		[ $hook = 1 ] && ha_log "repair (post-install hook) on HestiaCP $HESTIA_VERSION: ok"
+		ha_print_changes
+		;;
+	enable)
+		ha_check_compat || ha_die "refusing to enable on an incompatible HestiaCP"
+		cur=$(ha_system_theme)
+		theme=$(ha_scheme_theme "${1:-default}") || ha_die "unknown scheme '${1}' (use default or evergreen)"
+		ha_is_own_theme "$cur" || echo "$cur" > "$HA_STATE/previous-theme"
+		ha_set_system_theme "$theme"
+		ha_print_changes
+		;;
+	disable)
+		ha_set_system_theme "$(previous_theme)"
+		for u in $(ha_theme_users); do ha_reset_user_theme "$u"; done
+		ha_print_changes
+		;;
+	*)
+		sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
+		exit 2
+		;;
+esac

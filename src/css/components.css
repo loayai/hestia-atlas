@@ -1,0 +1,688 @@
+/* Components: buttons, badges, alerts, cards, meters, dialogs, tabs …
+   Hestia's own class names are mapped onto the Atlas design system.
+   ========================================================================== */
+
+/* Buttons
+   -------------------------------------------------------------------------- */
+
+.ha-btn,
+.ha .button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 7px;
+	min-width: 0;
+	min-height: var(--ha-control-h);
+	padding: 6px 14px;
+	border: 1px solid var(--ha-border-strong);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	box-shadow: none;
+	color: var(--ha-text);
+	font-family: inherit;
+	font-size: var(--ha-fs-base);
+	font-weight: var(--ha-fw-semibold);
+	line-height: 1.4;
+	text-shadow: none;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition:
+		background-color 120ms ease,
+		border-color 120ms ease,
+		color 120ms ease,
+		box-shadow 120ms ease;
+
+	&:hover {
+		background: var(--ha-slate-50);
+		border-color: var(--ha-slate-300);
+		color: var(--ha-text-strong);
+		text-decoration: none;
+		text-shadow: none;
+		box-shadow: none;
+	}
+
+	&:active {
+		background: var(--ha-slate-100);
+		box-shadow: inset 0 1px 2px rgb(0 0 0 / 8%);
+		text-shadow: none;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--ha-focus);
+		outline-offset: 2px;
+	}
+
+	&:disabled,
+	&[aria-disabled="true"] {
+		opacity: 0.55;
+		cursor: not-allowed;
+	}
+
+	& .fas,
+	& .far,
+	& .ha-i {
+		margin: 0;
+		font-size: 0.95em;
+		color: inherit;
+	}
+}
+
+/* Hestia renders its icons with colour helpers; inside buttons they follow the button colour. */
+.ha .button .fas[class*="icon-"] {
+	color: inherit;
+}
+
+/* Primary: Hestia's default ".button" (Save, Login, Next …) and our .ha-primary */
+.ha .button:not(.button-secondary, .button-danger, .button-circle, .button-floating),
+.ha .button.ha-primary,
+.ha-btn-primary {
+	background: var(--ha-primary);
+	border-color: var(--ha-primary);
+	color: #fff;
+
+	&:hover {
+		background: var(--ha-primary-hover);
+		border-color: var(--ha-primary-hover);
+		color: #fff;
+	}
+
+	&:active {
+		background: var(--ha-primary-active);
+		border-color: var(--ha-primary-active);
+	}
+}
+
+.ha .button-secondary {
+	background: var(--ha-surface);
+	border-color: var(--ha-border-strong);
+	color: var(--ha-text);
+}
+
+.ha .button-danger,
+.ha-btn-danger {
+	background: var(--ha-surface);
+	border-color: var(--ha-danger-border);
+	color: var(--ha-danger);
+
+	&:hover {
+		background: var(--ha-danger);
+		border-color: var(--ha-danger);
+		color: #fff;
+	}
+
+	&:active {
+		background: var(--ha-danger-hover);
+		border-color: var(--ha-danger-hover);
+		color: #fff;
+	}
+}
+
+.ha-btn-soft {
+	background: var(--ha-primary-soft);
+	border-color: var(--ha-primary-soft-border);
+	color: var(--ha-link);
+	font-weight: var(--ha-fw-semibold);
+
+	.ha & {
+		color: var(--ha-link);
+	}
+
+	&:hover {
+		.ha & {
+			background: var(--ha-brand-100);
+			border-color: var(--ha-link-hover);
+			color: var(--ha-link-hover);
+		}
+	}
+}
+
+.ha-btn-link,
+.ha .button.ha-back {
+	background: transparent;
+	border-color: transparent;
+	color: var(--ha-link);
+	font-weight: var(--ha-fw-semibold);
+	padding-left: 8px;
+	padding-right: 8px;
+
+	.ha & {
+		color: var(--ha-link);
+	}
+
+	&:hover {
+		.ha & {
+			background: transparent;
+			border-color: transparent;
+			color: var(--ha-link-hover);
+			text-decoration: underline;
+		}
+	}
+}
+
+.ha-btn-block {
+	display: flex;
+	width: 100%;
+}
+
+.ha .button-circle {
+	width: 34px;
+	height: 34px;
+	min-width: 34px;
+	padding: 0;
+	border-radius: 50%;
+}
+
+/* Badges / status
+   -------------------------------------------------------------------------- */
+
+.ha-badge,
+.ha .units-table-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	min-width: 0;
+	padding: 1px 7px;
+	border: 0;
+	border-radius: var(--ha-radius-sm);
+	background: var(--ha-neutral-bg);
+	box-shadow: none;
+	color: var(--ha-text-label);
+	font-size: var(--ha-fs-xs);
+	font-weight: var(--ha-fw-semibold);
+	line-height: 1.6;
+	text-shadow: none;
+}
+
+.ha-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-weight: var(--ha-fw-semibold);
+}
+
+.ha-status-success {
+	color: var(--ha-success);
+}
+
+.ha-status-danger {
+	color: var(--ha-danger);
+}
+
+/* Font Awesome status icons rendered by Hestia */
+.ha {
+	& .icon-green,
+	& .icon-green:hover {
+		color: var(--ha-success);
+	}
+
+	& .icon-red,
+	& .icon-red:hover {
+		color: var(--ha-danger);
+	}
+
+	& .icon-orange,
+	& .icon-orange:hover {
+		color: var(--icon-color-orange);
+	}
+
+	& .icon-dim {
+		color: var(--ha-slate-300);
+		text-shadow: none;
+	}
+}
+
+/* Alerts
+   -------------------------------------------------------------------------- */
+
+.ha .alert {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 12px 16px;
+	border: 1px solid var(--ha-info-border);
+	border-left-width: 4px;
+	border-radius: var(--ha-radius);
+	background: var(--ha-info-bg);
+	box-shadow: none;
+	color: var(--ha-text);
+	text-shadow: none;
+	font-weight: var(--ha-fw-normal);
+
+	& a {
+		color: var(--ha-link);
+		font-weight: var(--ha-fw-semibold);
+		text-decoration: underline;
+	}
+
+	& .fas {
+		flex: none;
+		width: 22px;
+		height: 22px;
+		margin: 1px 0 0;
+		border-radius: 50%;
+		background: var(--ha-info);
+		color: #fff;
+		font-size: 0.75rem;
+		line-height: 22px;
+		text-align: center;
+	}
+
+	& p {
+		margin: 0;
+	}
+}
+
+.ha .alert-success {
+	border-color: var(--ha-success-border);
+	background: var(--ha-success-bg);
+
+	& .fas {
+		background: var(--ha-success);
+		color: #fff;
+	}
+}
+
+.ha .alert-danger {
+	border-color: var(--ha-danger-border);
+	background: var(--ha-danger-bg);
+
+	& .fas {
+		background: var(--ha-danger);
+		color: #fff;
+	}
+}
+
+.ha .alert-info .fas {
+	background: var(--ha-info);
+	color: #fff;
+}
+
+.ha .inline-alert {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 11px 14px;
+	border: 1px solid var(--ha-info-border);
+	border-left-width: 4px;
+	border-radius: var(--ha-radius);
+	background: var(--ha-info-bg);
+	color: var(--ha-text);
+	font-weight: var(--ha-fw-normal);
+	overflow-wrap: anywhere;
+
+	& .fas {
+		flex: none;
+		margin: 3px 0 0;
+		color: var(--ha-info);
+	}
+
+	& p {
+		margin: 0;
+	}
+
+	& a {
+		font-weight: var(--ha-fw-semibold);
+		text-decoration: underline;
+	}
+
+	/* Inside toolbars Hestia uses inline alerts as compact status text */
+	.toolbar & {
+		padding: 4px 10px;
+		border-left-width: 1px;
+	}
+}
+
+.ha .inline-alert-danger {
+	border-color: var(--ha-danger-border);
+	border-left-color: var(--ha-danger);
+	background: var(--ha-danger-bg);
+
+	& .fas {
+		color: var(--ha-danger);
+	}
+}
+
+.ha .inline-alert-warning {
+	border-color: var(--ha-warning-border);
+	border-left-color: var(--ha-warning-solid);
+	background: var(--ha-warning-bg);
+
+	& .fas {
+		color: var(--ha-warning);
+	}
+}
+
+.ha .inline-alert-success {
+	border-color: var(--ha-success-border);
+	border-left-color: var(--ha-success);
+	background: var(--ha-success-bg);
+
+	& .fas {
+		color: var(--ha-success);
+	}
+
+	& a {
+		color: var(--ha-link);
+	}
+}
+
+/* Cards / panels
+   -------------------------------------------------------------------------- */
+
+.ha-card {
+	background: var(--ha-surface);
+	border-radius: var(--ha-radius);
+	box-shadow: var(--ha-shadow-card);
+}
+
+.ha .panel {
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	box-shadow: var(--ha-shadow-card);
+	background: var(--ha-surface);
+}
+
+.ha .card {
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	box-shadow: var(--ha-shadow-card);
+	transition:
+		box-shadow 120ms ease,
+		border-color 120ms ease;
+
+	&:hover {
+		border-color: var(--ha-border-strong);
+		box-shadow: var(--ha-shadow-pop);
+	}
+}
+
+.ha .card-thumb {
+	background: var(--ha-surface);
+	border-bottom: 1px solid var(--ha-border);
+}
+
+.ha .card-content {
+	color: var(--ha-text);
+	padding: 12px;
+}
+
+.ha .card-title {
+	color: var(--ha-link);
+	font-size: var(--ha-fs-md);
+}
+
+/* Resource meter */
+.ha-meter {
+	height: 6px;
+	margin-top: 6px;
+	border-radius: var(--ha-radius-pill);
+	background-color: var(--ha-slate-100);
+	overflow: hidden;
+
+	& span {
+		display: block;
+		height: 100%;
+		border-radius: inherit;
+		background-color: var(--ha-primary);
+	}
+
+	.is-warning & span {
+		background-color: var(--ha-warning-solid);
+	}
+
+	.is-danger & span {
+		background-color: var(--ha-danger);
+	}
+}
+
+/* Dialogs (Hestia confirmation dialogs + shortcuts)
+   -------------------------------------------------------------------------- */
+
+.ha .modal {
+	width: min(480px, calc(100vw - 32px));
+	min-width: 0;
+	max-width: none;
+	padding: 0;
+	border: 0;
+	border-radius: var(--ha-radius-lg);
+	background: var(--ha-surface);
+	box-shadow: var(--ha-shadow-modal);
+	color: var(--ha-text);
+
+	&::backdrop {
+		background-color: rgb(10 15 40 / 50%);
+	}
+}
+
+.ha .modal-title {
+	margin: 0;
+	padding: 18px 22px 0;
+	color: var(--ha-text-strong);
+	font-size: var(--ha-fs-xl);
+	font-weight: var(--ha-fw-semibold);
+	text-align: left;
+}
+
+.ha .modal-message {
+	padding: 12px 22px 22px;
+	color: var(--ha-text);
+	text-align: left;
+	overflow-wrap: anywhere;
+}
+
+.ha .modal-options {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	gap: 8px;
+	padding: 14px 22px;
+	border-top: 1px solid var(--ha-border);
+	background: var(--ha-surface-muted);
+	box-shadow: none;
+
+	& .button {
+		min-width: 90px;
+		margin: 0;
+	}
+}
+
+.ha .shortcuts {
+	background: var(--ha-surface);
+	color: var(--ha-text);
+	border: 0;
+	border-radius: var(--ha-radius-lg);
+	box-shadow: var(--ha-shadow-modal);
+
+	&::backdrop {
+		background-color: rgb(10 15 40 / 50%);
+	}
+
+	& .key {
+		color: var(--ha-sidebar);
+		background: var(--ha-neutral-bg);
+		border: 1px solid var(--ha-border-strong);
+		border-radius: var(--ha-radius-sm);
+		padding: 0 6px;
+		margin-right: 12px;
+		font-family: var(--ha-font-mono);
+		font-size: var(--ha-fs-sm);
+	}
+}
+
+.ha .shortcuts-header {
+	border-bottom: 1px solid var(--ha-border);
+}
+
+.ha .shortcuts-title {
+	color: var(--ha-text-strong);
+	text-transform: none;
+	font-size: var(--ha-fs-lg);
+}
+
+.ha .shortcuts-close:hover {
+	color: var(--ha-danger);
+}
+
+.ha .shortcuts-list {
+	padding: 20px 24px;
+}
+
+.ha .spinner-overlay {
+	background-color: rgb(250 250 250 / 70%);
+	color: var(--ha-primary);
+
+	& .fas {
+		box-shadow: none;
+	}
+}
+
+/* Tabs
+   -------------------------------------------------------------------------- */
+
+.ha .tabs {
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	box-shadow: none;
+	padding: 0;
+}
+
+.ha .tabs-items {
+	border-bottom: 1px solid var(--ha-border);
+	padding: 0 8px;
+	gap: 4px;
+}
+
+.ha .tabs-item {
+	margin: 0;
+	padding: 10px 12px;
+	border-bottom: 2px solid transparent;
+	color: var(--ha-text-label);
+	text-transform: none;
+	font-weight: var(--ha-fw-semibold);
+
+	&:hover {
+		color: var(--ha-link);
+	}
+
+	&[aria-selected="true"] {
+		color: var(--ha-link);
+		border-bottom-color: var(--ha-primary);
+	}
+}
+
+.ha .tabs-panel {
+	padding: 16px;
+}
+
+/* Collapse sections (Hestia <details>)
+   -------------------------------------------------------------------------- */
+
+.ha .collapse {
+	margin-top: 8px;
+}
+
+.ha .collapse-header {
+	padding: 18px 0 10px;
+	border-bottom: 1px solid var(--ha-border);
+	color: var(--ha-text-strong);
+	font-size: var(--ha-fs-lg);
+	font-weight: var(--ha-fw-semibold);
+
+	&::after {
+		color: var(--ha-slate-400);
+	}
+
+	&:hover::after {
+		color: var(--ha-link);
+	}
+}
+
+.ha .box-collapse {
+	margin-bottom: 10px;
+	border: 1px solid var(--ha-border);
+	border-radius: var(--ha-radius);
+	background: var(--ha-surface);
+	overflow: hidden;
+}
+
+.ha .box-collapse-header {
+	padding: 12px 44px 12px 16px;
+	border: 0;
+	background: var(--ha-surface);
+	box-shadow: none;
+	color: var(--ha-text-strong);
+	text-shadow: none;
+	font-weight: var(--ha-fw-semibold);
+
+	&:hover {
+		color: var(--ha-link);
+		background: var(--ha-surface-muted);
+	}
+
+	& .fas {
+		color: var(--ha-text-label);
+		margin-right: 4px;
+	}
+}
+
+.ha .box-collapse[open] .box-collapse-header {
+	border-bottom: 1px solid var(--ha-border);
+}
+
+.ha .box-collapse-content {
+	padding: 16px;
+
+	@media (--md) {
+		padding: 18px 24px 8px;
+	}
+}
+
+/* Clipboard / values list / misc
+   -------------------------------------------------------------------------- */
+
+.ha .clipboard-button {
+	border: 1px solid var(--ha-border-input);
+	border-left: 0;
+	background: var(--ha-surface-muted);
+	color: var(--ha-text-label);
+
+	&:hover .fas {
+		color: var(--ha-link);
+	}
+}
+
+.ha .values-list-item {
+	padding: 6px 0;
+	border-bottom: 1px solid var(--ha-border);
+
+	&:last-child {
+		border-bottom: 0;
+	}
+}
+
+.ha .values-list-label {
+	color: var(--ha-text-label);
+	font-weight: var(--ha-fw-semibold);
+}
+
+.ha .hint {
+	color: var(--ha-text-muted);
+	font-size: var(--ha-fs-sm);
+	font-style: normal;
+}
+
+.ha .hint-prefix {
+	color: var(--ha-text-label);
+}
+
+.ha .qr-code {
+	border-color: var(--ha-border);
+	box-shadow: none;
+}
+
+.ha .debug-panel-toggle {
+	background-color: var(--ha-warning-solid);
+}

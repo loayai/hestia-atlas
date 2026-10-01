@@ -1,0 +1,14 @@
+/*!
+ * Hestia Atlas Lite — a CSS-only theme for HestiaCP.
+ * Single stylesheet; no PHP, no JavaScript. Install as a Hestia custom theme.
+ * Not affiliated with or endorsed by cPanel, L.L.C. or WebPros.
+ * License: GPL-3.0-or-later. Font: Open Sans (SIL OFL 1.1), embedded.
+ */
+@import "../css/tokens.css";
+@import "../css/base.css";
+@import "../css/components.css";
+@import "../css/lists.css";
+@import "../css/forms.css";
+@import "../css/pages.css";
+@import "../css/login.css";
+@import "./lite-shell.css";
