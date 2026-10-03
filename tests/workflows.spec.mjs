@@ -318,3 +318,40 @@ test.describe('theme selection', () => {
 		await expect(page.locator('.ha-sidebar')).toBeVisible();
 	});
 });
+
+test.describe('light / dark mode', () => {
+	test.use({ storageState: userState });
+
+	test('header toggle switches mode, remembers it and applies it on the login page', async ({ page, browser, baseURL }) => {
+		await page.emulateMedia({ colorScheme: 'light' });
+		await go(page, '/atlas/');
+		const html = page.locator('html');
+		await expect(html).toHaveAttribute('data-ha-mode', 'light');
+		const toggle = page.locator('[data-ha-action="toggle-mode"]');
+		await expect(toggle).toHaveAttribute('aria-label', /dark/i);
+		// The toggle sits right before the notifications button
+		expect(await page.evaluate(() => document.querySelector('.ha-mode-toggle').nextElementSibling?.classList.contains('ha-notifications'))).toBe(true);
+
+		await toggle.click();
+		await expect(html).toHaveAttribute('data-ha-mode', 'dark');
+		await expect(toggle).toHaveAttribute('aria-label', /light/i);
+		const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+		expect(bg).not.toBe('rgb(244, 246, 249)');
+
+		await page.reload();
+		await expect(html).toHaveAttribute('data-ha-mode', 'dark');
+		await go(page, '/list/web/');
+		await expect(html).toHaveAttribute('data-ha-mode', 'dark');
+
+		await toggle.click();
+		await expect(html).toHaveAttribute('data-ha-mode', 'light');
+	});
+
+	test('follows the system preference until a choice is made', async ({ browser, baseURL }) => {
+		const ctx = await browser.newContext({ colorScheme: 'dark', ignoreHTTPSErrors: true, baseURL });
+		const page = await ctx.newPage();
+		await page.goto('/login/');
+		await expect(page.locator('html')).toHaveAttribute('data-ha-mode', 'dark');
+		await ctx.close();
+	});
+});

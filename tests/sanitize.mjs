@@ -8,7 +8,8 @@ let serverIp = null;
 
 export async function sanitizeRules() {
 	if (serverIp === null) {
-		serverIp = (await dns.lookup(host).catch(() => ({ address: '' }))).address;
+		// Behind a CDN the panel hostname resolves to the CDN, so the origin can be given explicitly.
+		serverIp = process.env.ORIGIN_IP || (await dns.lookup(host).catch(() => ({ address: '' }))).address;
 	}
 	const domain = host.split('.').slice(1).join('.'); // parent domain of the panel host
 	return { host, serverIp, domain };
@@ -26,6 +27,8 @@ export async function sanitize(page) {
 			if (!s) return s;
 			let out = s.split(host).join('panel.example.com');
 			if (domain) out = out.split(domain).join('example.net');
+			// Hostnames that embed an address (e.g. 203-0-113-10.sslip.io style) are masked too.
+			out = out.replace(/\b\d{1,3}-\d{1,3}-\d{1,3}-\d{1,3}\b/g, '203-0-113-10');
 			return out.replace(ipv4, (ip) => (keep.has(ip) || harmless.test(ip) ? ip : ip === serverIp ? '203.0.113.10' : '198.51.100.24'));
 		};
 		const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);

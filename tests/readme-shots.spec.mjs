@@ -7,7 +7,9 @@ import { sanitize } from './sanitize.mjs';
 const OUT = path.resolve(import.meta.dirname, '..', 'screenshots', 'readme');
 // README_SCHEME=evergreen captures only the Evergreen example (run with that scheme active).
 const EVERGREEN = process.env.README_SCHEME === 'evergreen';
-const SHOTS = EVERGREEN ? [['user', 'evergreen-tools', '/atlas/', { width: 1440, height: 900 }]] : [
+// README_SCHEME=dark captures only the dark-mode example.
+const DARK = process.env.README_SCHEME === 'dark';
+const SHOTS = DARK ? [['user', 'dark-tools', '/atlas/', { width: 1440, height: 900 }], ['user', 'dark-web-domains', '/list/web/', { width: 1440, height: 760 }]] : EVERGREEN ? [['user', 'evergreen-tools', '/atlas/', { width: 1440, height: 900 }]] : [
 	['user', 'tools', '/atlas/', { width: 1440, height: 900 }],
 	['user', 'web-domains', '/list/web/', { width: 1440, height: 760 }],
 	['user', 'edit-web', '/edit/web/?domain=atlas-demo.com&token={token}', { width: 1440, height: 900 }],
@@ -19,6 +21,7 @@ const SHOTS = EVERGREEN ? [['user', 'evergreen-tools', '/atlas/', { width: 1440,
 for (const [role, name, url, viewport] of SHOTS) {
 	test(`readme ${name}`, async ({ browser, baseURL }) => {
 		const ctx = await browser.newContext({ viewport, storageState: path.join(AUTH_DIR, `${role}.json`), ignoreHTTPSErrors: true });
+		await ctx.addInitScript((m) => { try { localStorage.setItem('ha-color-mode', m); } catch {} }, DARK ? 'dark' : 'light');
 		const page = await ctx.newPage();
 		await page.goto('/atlas/', { referer: `${baseURL}/` });
 		const token = await page.locator('#token').getAttribute('token');
@@ -32,7 +35,7 @@ for (const [role, name, url, viewport] of SHOTS) {
 }
 
 test('readme login', async ({ browser }) => {
-	test.skip(EVERGREEN);
+	test.skip(EVERGREEN || DARK);
 	const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 }, ignoreHTTPSErrors: true });
 	const page = await ctx.newPage();
 	await page.goto('/login/');

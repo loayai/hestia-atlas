@@ -35,6 +35,8 @@ runs through Hestia's own backend.
   action bar next to *Cancel* (sticky on phones), callout messages, restyled confirmation dialogs.
 * **Login** — branded card for login, 2FA and password reset.
 * **Colour schemes** — default (Hestia blue) and **Evergreen** (green navigation `#60a96d`).
+* **Light and dark mode** — a sun/moon toggle before the notifications bell; follows the
+  system preference until you choose, remembered per browser, applied before first paint.
 * **Safe by construction** — no Hestia file is patched; CSRF, authentication, permissions,
   translations, validation, bulk actions, dialogs, shortcuts and the API are Hestia's own.
 
@@ -46,10 +48,14 @@ runs through Hestia's own backend.
 | --- | --- | --- |
 | ![Admin tools](screenshots/readme/admin-tools.png) | ![Evergreen](screenshots/readme/evergreen-tools.png) | ![Login](screenshots/readme/login.png) |
 
+| Dark mode — Tools | Dark mode — Web Domains |
+| --- | --- |
+| ![Dark mode Tools page](screenshots/readme/dark-tools.png) | ![Dark mode web domains](screenshots/readme/dark-web-domains.png) |
+
 Screenshots of every page — desktop and mobile, administrator and user — are in
 [`screenshots/current`](screenshots/current) (default scheme),
 [`screenshots/evergreen`](screenshots/evergreen), [`screenshots/lite`](screenshots/lite),
-[`screenshots/lite-evergreen`](screenshots/lite-evergreen), with stock Hestia in
+[`screenshots/lite-evergreen`](screenshots/lite-evergreen), [`screenshots/dark`](screenshots/dark), with stock Hestia in
 [`screenshots/baseline`](screenshots/baseline).
 
 ## Two editions
