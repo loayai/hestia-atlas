@@ -2,6 +2,7 @@
 // Runs after Hestia's own scripts (deferred custom script). Everything here is progressive:
 // if it fails, Hestia's markup and behaviour remain fully functional.
 import { initDropdowns } from './dropdowns.js';
+import { initMode } from './mode.js';
 import { enhanceForms } from './forms.js';
 import { initNav } from './nav.js';
 import { initSearch } from './search.js';
@@ -32,6 +33,7 @@ ready(() => {
 	}
 	if (root.classList.contains('ha-app')) {
 		const data = readData();
+		safely('mode', initMode);
 		safely('nav', () => initNav(data));
 		safely('dropdowns', initDropdowns);
 		safely('search', () => initSearch(data));

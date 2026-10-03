@@ -18,6 +18,8 @@ define("HA_THEME", "atlas");
 define("HA_THEMES", ["atlas", "atlas-evergreen"]);
 define("HA_LIB", __DIR__);
 define("HA_ASSETS", "/atlas/assets");
+// Applies the remembered (or system) light/dark mode before first paint.
+define("HA_MODE_BOOT", '(function(){var h=document.documentElement,m;try{m=localStorage.getItem("ha-color-mode")}catch(e){}if(m!=="light"&&m!=="dark"){m=window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"}h.setAttribute("data-ha-mode",m)})();');
 
 /** Escape for HTML (falls back if Hestia's helper is unavailable). */
 function ha_e($value): string {

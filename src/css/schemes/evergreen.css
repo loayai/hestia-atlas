@@ -62,3 +62,43 @@
 	--ha-green-600: #1c6e5a;
 	--chart-line-2-color: var(--ha-amber-500);
 }
+
+/* Evergreen in dark mode: a deeper navigation green with white labels, green actions. */
+:root[data-ha-mode="dark"] {
+	--ha-sidebar: #2c5535;
+	--ha-sidebar-raised: #356440;
+	--ha-sidebar-deep: #23452b;
+	--ha-sidebar-text: #fff;
+	--ha-sidebar-text-muted: #e3efe5;
+	--ha-sidebar-hover-bg: rgb(255 255 255 / 8%);
+	--ha-sidebar-active-bg: rgb(255 255 255 / 14%);
+
+	--ha-brand-50: #13261a;
+	--ha-brand-100: #1a3423;
+	--ha-brand-300: #2f6a3c;
+	--ha-brand-500: #5cb26c;
+	--ha-brand-600: #3f8a4c;
+	--ha-brand-700: #8fd09a;
+	--ha-brand-800: #b3e2bb;
+	--ha-primary-hover: #4a9a58;
+	--ha-primary-active: #367a42;
+	--ha-accent-50: #13261a;
+	--ha-accent-100: #1a3423;
+	--ha-accent-500: #60a96d;
+	--ha-accent-700: #8fd09a;
+
+	--ha-slate-25: #19231d;
+	--ha-slate-50: #111915;
+	--ha-slate-100: #1e2a23;
+	--ha-slate-150: #27352c;
+	--ha-slate-200: #304036;
+	--ha-slate-300: #46574c;
+	--ha-slate-400: #6c7d72;
+	--ha-slate-500: #8e9e94;
+	--ha-slate-600: #aab8ae;
+	--ha-slate-800: #dbe6de;
+	--ha-slate-900: #f1f6f2;
+	--ha-surface: #16201a;
+	--ha-surface-hover: #1d2a22;
+	--ha-shadow-header: 0 1px 0 #27352c, 0 4px 12px rgb(0 0 0 / 30%);
+}

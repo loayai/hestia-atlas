@@ -18,7 +18,7 @@ if (!ha_is_active()) {
 
 // Login / password reset pages: only branding helpers, no application shell.
 if (empty($_SESSION["user"])) {
-	echo '<script>document.documentElement.classList.add("ha","ha-guest");</script>';
+	echo '<script>document.documentElement.classList.add("ha","ha-guest");' . HA_MODE_BOOT . "</script>";
 	echo '<script defer src="' . ha_e(ha_asset("atlas.js")) . '"></script>';
 	return;
 }
@@ -133,6 +133,11 @@ function ha_render_header(array $ctx, array $data): string {
 		</form>
 		<button type="button" class="ha-icon-btn ha-search-toggle" data-ha-action="open-search" aria-label="<?= ha_e(ha_t("Search")) ?>">
 			<?= ha_icon("search") ?>
+		</button>
+		<button type="button" class="ha-icon-btn ha-icon-btn-circle ha-mode-toggle" data-ha-action="toggle-mode"
+			data-label-dark="<?= ha_e(ha_t("Switch to dark mode")) ?>" data-label-light="<?= ha_e(ha_t("Switch to light mode")) ?>"
+			aria-label="<?= ha_e(ha_t("Switch to dark mode")) ?>" title="<?= ha_e(ha_t("Switch to dark mode")) ?>">
+			<?= ha_icon("moon", "ha-mode-icon-dark") ?><?= ha_icon("sun", "ha-mode-icon-light") ?>
 		</button>
 		<?php if ($ctx["can"]["notifications"]) { ?>
 			<div class="ha-dropdown ha-notifications" x-data="notifications">
@@ -265,6 +270,7 @@ $ha_json = json_encode(
 (function () {
 	var d = document, h = d.documentElement, done = { shell: 0, head: 0, bar: 0 };
 	h.classList.add("ha", "ha-app", "ha-loading");
+	<?= HA_MODE_BOOT ?>
 	try { if (localStorage.getItem("ha-nav-collapsed") === "1") h.classList.add("ha-nav-collapsed"); } catch (e) {}
 	function tpl(id) { var t = d.getElementById(id); return t ? t.content.cloneNode(true) : null; }
 	function mount() {

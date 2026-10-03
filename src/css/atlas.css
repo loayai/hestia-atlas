@@ -4,6 +4,7 @@
  * License: GPL-3.0-or-later. Icons: Lucide (ISC). Font: Open Sans (OFL-1.1).
  */
 @import "./tokens.css";
+@import "./dark.css";
 @import "./fonts.css";
 @import "./base.css";
 @import "./shell.css";

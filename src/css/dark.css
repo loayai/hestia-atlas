@@ -1,0 +1,90 @@
+/* Dark mode
+   --------------------------------------------------------------------------
+   Selected with the header toggle (html[data-ha-mode="dark"], set before first
+   paint from the remembered choice or the system preference). Only colour tokens
+   change; the neutral scale is inverted and the brand/accent scales are re-stepped
+   so text keeps ≥ 4.5:1 contrast on the dark surfaces.
+   ========================================================================== */
+
+:root[data-ha-mode="dark"] {
+	color-scheme: dark;
+
+	/* navigation column: darker than the page */
+	--ha-ink-900: #070c16;
+	--ha-ink-800: #0c1422;
+	--ha-ink-700: #18233a;
+	--ha-ink-600: #26334d;
+	--ha-sidebar-text: #d5dde8;
+	--ha-sidebar-text-muted: #9aa8bc;
+
+	/* neutrals, inverted (hue 215) */
+	--ha-slate-25: #1a2436;
+	--ha-slate-50: #111a29;
+	--ha-slate-100: #1f2a3d;
+	--ha-slate-150: #28354b;
+	--ha-slate-200: #31405a;
+	--ha-slate-300: #475670;
+	--ha-slate-400: #6c7b93;
+	--ha-slate-500: #8e9bb0;
+	--ha-slate-600: #aab6c7;
+	--ha-slate-800: #dbe3ee;
+	--ha-slate-900: #f1f5f9;
+
+	/* brand (Hestia blue) re-stepped for dark surfaces */
+	--ha-brand-50: #13253a;
+	--ha-brand-100: #19314f;
+	--ha-brand-300: #2e5d8d;
+	--ha-brand-500: #4ea1ea;
+	--ha-brand-600: #2f7fc4;
+	--ha-brand-700: #82bcf0;
+	--ha-brand-800: #a9d1f6;
+
+	/* accent (Hestia magenta) */
+	--ha-accent-50: #2a1220;
+	--ha-accent-100: #3d1a2d;
+	--ha-accent-500: #f0468a;
+	--ha-accent-700: #f27aa9;
+
+	/* status */
+	--ha-green-50: #10291d;
+	--ha-green-300: #1f5a3c;
+	--ha-green-600: #4cc98a;
+	--ha-amber-50: #2b2110;
+	--ha-amber-100: #3a2c12;
+	--ha-amber-300: #6b5320;
+	--ha-amber-500: #f5a524;
+	--ha-amber-700: #f2c065;
+	--ha-red-50: #2d1517;
+	--ha-red-300: #6e2c2e;
+	--ha-red-600: #ef6b6b;
+	--ha-red-700: #e04f4f;
+
+	/* surfaces and actions */
+	--ha-surface: #162032;
+	--ha-surface-hover: #1d2840;
+	--ha-primary-hover: #3a8ed6;
+	--ha-primary-active: #2a73b3;
+
+	--ha-shadow-card: 0 1px 2px rgb(0 0 0 / 40%), 0 0 0 1px rgb(255 255 255 / 4%);
+	--ha-shadow-header: 0 1px 0 #28354b, 0 4px 12px rgb(0 0 0 / 30%);
+	--ha-shadow-pop: 0 12px 32px rgb(0 0 0 / 55%), 0 2px 6px rgb(0 0 0 / 40%);
+	--ha-shadow-modal: 0 24px 60px rgb(0 0 0 / 65%);
+}
+
+/* Mode toggle: show the icon of the mode you would switch to */
+.ha-mode-toggle .ha-mode-icon-light,
+:root[data-ha-mode="dark"] .ha-mode-toggle .ha-mode-icon-dark {
+	display: none;
+}
+
+:root[data-ha-mode="dark"] .ha-mode-toggle .ha-mode-icon-light {
+	display: inline;
+}
+
+/* Native controls and a few Hestia images that assume a light page */
+:root[data-ha-mode="dark"] {
+	& .ha .form-select,
+	& .form-select {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23aab6c7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+	}
+}

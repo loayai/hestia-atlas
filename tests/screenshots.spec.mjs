@@ -20,6 +20,9 @@ const VIEWPORTS = {
 };
 const selected = (process.env.SHOT_VIEWPORTS || 'desktop,mobile').split(',');
 const filter = process.env.SHOT_FILTER || '';
+// SHOT_MODE=dark|light forces the colour mode (default: light) before every page load.
+const MODE = process.env.SHOT_MODE === 'dark' ? 'dark' : 'light';
+const forceMode = (ctx) => ctx.addInitScript((m) => { try { localStorage.setItem('ha-color-mode', m); } catch {} }, MODE);
 
 // [name, url] — `{token}` is replaced with the session CSRF token.
 const PAGES = {
@@ -72,6 +75,7 @@ test.describe('login', () => {
 	for (const vp of selected) {
 		test(`login @${vp}`, async ({ browser }) => {
 			const ctx = await browser.newContext({ viewport: VIEWPORTS[vp], ignoreHTTPSErrors: true });
+			await forceMode(ctx);
 			const page = await ctx.newPage();
 			await page.goto('/login/');
 			await sanitize(page);
@@ -95,6 +99,7 @@ for (const [role, pages] of Object.entries(PAGES)) {
 					storageState: path.join(AUTH_DIR, `${role}.json`),
 					ignoreHTTPSErrors: true,
 				});
+				await forceMode(ctx);
 				const page = await ctx.newPage();
 				await page.goto('/');
 				const token = await page.locator('#token').getAttribute('token');
